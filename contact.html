@@ -1,36 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Concert Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container mt-5">
-  <h2>Concert Registration Form</h2>
+  <!-- CONTAINER -->
+  <div class="container mt-5" style="max-width: 600px;">
 
-  <form id="form">
-    <input name="name" class="form-control mb-2" placeholder="Full Name" required>
-    <input name="email" type="email" class="form-control mb-2" placeholder="Email Address" required>
-    <input name="phone" class="form-control mb-2" placeholder="Phone Number" required>
-    <textarea name="reason" class="form-control mb-2" placeholder="Why do you want to join this concert?"></textarea>
-    <textarea name="notes" class="form-control mb-2" placeholder="Additional Notes"></textarea>
+    <!-- 🔙 BACK BUTTON (INI YANG KAMU TANYA) -->
+    <a href="index.html" class="btn btn-outline-light mb-4">
+      ← Back to Home
+    </a>
 
-    <button class="btn btn-success">Submit</button>
-  </form>
-</div>
+    <!-- FORM CARD -->
+    <div class="card bg-black text-white shadow">
+      <div class="card-body">
 
-<script>
-const scriptURL = 'https://script.google.com/macros/s/AKfycbz7yU24q-nikO2GBM0yHwMQCNuL4eJWGjQtEplOshbJzbAnBkjPpMWresN-WFUkGArN/exec';
-const form = document.getElementById('form');
+        <h2 class="text-center mb-2">🎶 Concert Registration</h2>
+        <p class="text-center mb-4">
+          Register now to join Harmony Night Live Music Concert
+        </p>
 
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-    .then(() => alert("Registration Successful!"))
-    .catch(() => alert("Error occurred"));
-});
-</script>
+        <!-- FORM -->
+        <form id="form">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="text" name="phone" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Reason for Joining</label>
+            <textarea name="reason" class="form-control" rows="2"></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Additional Notes</label>
+            <textarea name="notes" class="form-control" rows="2"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-danger w-100">
+            Submit Registration
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GOOGLE SHEETS SCRIPT -->
+  <script>
+    const scriptURL = 'PASTE_GOOGLE_APPS_SCRIPT_URL_DI_SINI';
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(() => {
+        alert("Registration successful!");
+        form.reset();
+      })
+      .catch(() => alert("Error submitting form"));
+    });
+  </script>
 
 </body>
 </html>
